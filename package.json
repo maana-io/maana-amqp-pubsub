@@ -1,0 +1,41 @@
+{
+  "name": "maana-amqp-pubsub",
+  "version": "0.1.4",
+  "description": "Maana graphql-subscriptions PubSub Engine using AMQP",
+  "main": "dist/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "lint": "tslint ./src/**/*.ts",
+    "prepublish": "tsc"
+  },
+  "dependencies": {
+    "@types/amqplib": "^0.5.2",
+    "async": "^2.5.0",
+    "graphql-subscriptions": "^1.0.0"
+  },
+  "devDependencies": {
+    "amqplib": "^0.5.2",
+    "typescript": "^2.7.1",
+    "tslint": "^4.4.2",
+    "@types/bluebird": "^3.0.37"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "testMatch": [
+      "**/src/test/*.spec\\.(ts|tsx|js)"
+    ]
+  },
+  "typings": "dist/index.d.ts",
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  }
+}
