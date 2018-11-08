@@ -36,13 +36,13 @@ export class AmqpPubSub implements PubSubEngine {
 
   }
 
-  publish(trigger: string, payload: any): boolean {
+  public publish(trigger: string, payload: any): Promise<void> {
     // As PubSubEngine publish interface is sync, spin up a promise asynchronously, and just return true
     // All implementations are built this way and there seems to be no workaround without changing
     // graphql-subscription, so we must (regardless of implementation) make sure that system doesn't
     // depend on order of the events.
     this.producer.publish(new QueueConfig(trigger), payload);
-    return true;
+    return Promise.resolve()
   }
 
   public subscribe(trigger: string, onMessage: Function, options?: Object): Promise<number> {
