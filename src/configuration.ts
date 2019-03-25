@@ -14,11 +14,11 @@ export class QueueConfig {
    * of service type will get the event. If not provided, all instances will get the message
    */
   constructor(public queueName: string, public serviceName?: string) {
-    this.publishExchange = `${queueName}.Exchange.fanout`
+    this.publishExchange = `${queueName}.Exchange.fanout`;
     if (serviceName) {
-      this.subscribeQueue = `${queueName}.${serviceName}.Queue`
+      this.subscribeQueue = `${queueName}.${serviceName}.Queue`;
     } else {
-      this.subscribeQueue = `${queueName}.Queue`
+      this.subscribeQueue = `${queueName}.Queue`;
     }
   }
 }

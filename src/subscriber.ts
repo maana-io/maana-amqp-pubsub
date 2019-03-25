@@ -14,7 +14,6 @@ export class AMQPSubscriber {
       .then(channel => {
         return AMQPSubscriber.setupChannel(channel, queueConfig)
           .then(() => {
-            // console.log('Channels are set up, subscribing to queue', queueConfig)
             return this.subscribeToChannel(channel, queueConfig, action)
           })
       })
@@ -26,8 +25,6 @@ export class AMQPSubscriber {
       channel.consume(queueConfig.subscribeQueue, (message) => {
         return new Promise((resolve, reject) => {
           const msg = AMQPSubscriber.getMessageObject(message);
-          // console.log('Got message, invoking action', msg);
-          // console.log(typeof action)
           return resolve(
             action(msg)
             .then(() => {
@@ -38,7 +35,13 @@ export class AMQPSubscriber {
               return channel.nack(message, false, false);
             }))
         })
-      }));
+      }).then(channelOptions => {
+        let disposer = function (): any {
+          return channel.cancel(channelOptions.consumerTag)
+        }
+        return disposer
+      }
+      ));
   }
 
   protected static async setupChannel(channel: amqp.Channel, queueConfig: QueueConfig): Promise<string> {

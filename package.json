@@ -1,6 +1,6 @@
 {
   "name": "maana-amqp-pubsub",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Maana graphql-subscriptions PubSub Engine using AMQP",
   "main": "dist/index.js",
   "scripts": {
